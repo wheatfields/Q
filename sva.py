@@ -639,30 +639,131 @@ class sva:
         
         def __init__(self, path, sheet_name):
             self.path = path
-            self.sheet_name = sheet_name        
+            self.sheet_name = sheet_name     
+            self.random = self.random(path, sheet_name)
+            self.future = self.future(path, sheet_name)
         
         class random:
             def __init__(self, path, sheet_name):
                   self.path = path
                   self.sheet_name = sheet_name           
             
+            def random_all(self):
+                random_all = sva.table_import(path = self.path,
+                                        sheet_name = self.sheet_name,   
+                                          columns = 'FL:FM', 
+                                          row_start = 16, row_end = 26,
+                                          header_row = 16,
+                                          clear_first_n_rows = None, 
+                                          index_col = 0,
+                                          trim_column_names = True,
+                                          trim_index_name = None)   
+                return random_all
+            
             def death(self):
-                death = self.table_import(path = self.path,
-                                            sheet_name = self.sheet_name,   
-                                              columns = 'FL:FM', 
-                                              row_start = 16, row_end = 26,
-                                              header_row = 16,
-                                              clear_first_n_rows = None, 
-                                              index_col = 0,
-                                              trim_column_names = True,
-                                              trim_index_name = None)
+                death = self.random_all().iloc[0,0]
                 return death
 
+            def death_ibnr(self):
+                death_ibnr = self.random_all().iloc[1,0]
+                return death_ibnr
 
+            def death_rbna(self):
+                death_rbna = self.random_all().iloc[2,0]
+                return death_rbna
+
+            def tpd(self):
+                tpd = self.random_all().iloc[3,0]
+                return tpd
+
+            def tpd_ibnr(self):
+                tpd_ibnr = self.random_all().iloc[4,0]
+                return tpd_ibnr
+
+            def tpd_rbna(self):
+                tpd_rbna = self.random_all().iloc[5,0]
+                return tpd_rbna
+            
+            def ip(self):
+                ip = self.random_all().iloc[6,0]
+                return ip
+
+            def ip_dlr(self):
+                ip_dlr = self.random_all().iloc[7,0]
+                return ip_dlr
+
+            def ip_ibnr(self):
+                ip_ibnr = self.random_all().iloc[8,0]
+                return ip_ibnr
+
+            def ip_rbna(self):
+                ip_rbna = self.random_all().iloc[9,0]
+                return ip_rbna
+            
+        class future:
+            def __init__(self, path, sheet_name):
+                  self.path = path
+                  self.sheet_name = sheet_name           
+            
+            def future_all(self):
+                future_all = sva.table_import(path = self.path,
+                                        sheet_name = self.sheet_name,   
+                                          columns = 'FL:FM', 
+                                          row_start = 27, row_end = 37,
+                                          header_row = 27,
+                                          clear_first_n_rows = None, 
+                                          index_col = 0,
+                                          trim_column_names = True,
+                                          trim_index_name = None)   
+                return future_all
+            
+            def death(self):
+                death = self.future_all().iloc[0,0]
+                return death
+
+            def death_ibnr(self):
+                death_ibnr = self.future_all().iloc[1,0]
+                return death_ibnr
+
+            def death_rbna(self):
+                death_rbna = self.future_all().iloc[2,0]
+                return death_rbna
+
+            def tpd(self):
+                tpd = self.future_all().iloc[3,0]
+                return tpd
+
+            def tpd_ibnr(self):
+                tpd_ibnr = self.future_all().iloc[4,0]
+                return tpd_ibnr
+
+            def tpd_rbna(self):
+                tpd_rbna = self.future_all().iloc[5,0]
+                return tpd_rbna
+            
+            def ip(self):
+                ip = self.future_all().iloc[6,0]
+                return ip
+
+            def ip_dlr(self):
+                ip_dlr = self.future_all().iloc[7,0]
+                return ip_dlr
+
+            def ip_ibnr(self):
+                ip_ibnr = self.future_all().iloc[8,0]
+                return ip_ibnr
+
+            def ip_rbna(self):
+                ip_rbna = self.future_all().iloc[9,0]
+                return ip_rbna  
+          
+        def time_to_react_future(self):
+            time_to_react_future = 1
 # =============================================================================
 # 11
 
-
+class test:
+    print('yes')
 
 # =============================================================================
 # 12

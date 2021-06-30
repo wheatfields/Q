@@ -23,6 +23,6 @@ import sva
 
 sva = sva.sva(path=path, sheet_name=new_product)
 
-sva.operating_expense_perc_premium()[0]
+sva.operating_expense_perc_premium()
 
-sva.dlr_parameters.salary_replacement_ratio()[0]
+sva.stress_margins.random.death()
