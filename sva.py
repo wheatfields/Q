@@ -62,28 +62,26 @@ class sva:
             table.index.name = table.index.name.split('.')[0]
         
         # -----------------------
-        # Add information on where the assumption came from in the workbook.
-        # [Will always be reference 1]
-        info = ['Path = ' + path,
-                'Sheet name = ' + sheet_name, 
-                'Columns = ' + columns, 
-                'Rows = ' + str(str(row_start) + ' to ' + str(row_end)), 
-                'Header row = ' + str(header_row), 
-                'Number of rows after header cleared = ' + str(clear_first_n_rows),
-                'Column used for index (0-indexed) = ' + str(index_col)
-                ]
+        # # Add information on where the assumption came from in the workbook.
+        # # [Will always be reference 1]
+        # info = ['Path = ' + path,
+        #         'Sheet name = ' + sheet_name, 
+        #         'Columns = ' + columns, 
+        #         'Rows = ' + str(str(row_start) + ' to ' + str(row_end)), 
+        #         'Header row = ' + str(header_row), 
+        #         'Number of rows after header cleared = ' + str(clear_first_n_rows),
+        #         'Column used for index (0-indexed) = ' + str(index_col)
+        #         ]
         # -----------------------
     
-        return table, info    
+        return table
+    # , info    
         
 # =============================================================================
 # 1         
 
     def claims_reporting_delay(self):
         """
-        Tuple contains:
-        [0] DataFrame
-        [1] Source information
         """
         claims_reporting_delay = self.table_import(path = self.path,
                                                     sheet_name = self.sheet_name, 
@@ -99,9 +97,6 @@ class sva:
     
     def claim_delay_factors(self):
         """
-        Tuple contains:
-        [0] DataFrame
-        [1] Source information
         """
         claim_delay_factors = self.table_import(path = self.path,
                                                 sheet_name = self.sheet_name, 
@@ -119,9 +114,6 @@ class sva:
     
     def claims_expense_reserve(self):
         """
-        Tuple contains:
-        [0] DataFrame
-        [1] Source information
         """        
         claims_expense_reserve = self.table_import(path = self.path,
                                                 sheet_name = self.sheet_name, 
@@ -136,9 +128,6 @@ class sva:
        
     def operating_expense_perc_premium(self):
         """
-        Tuple contains:
-        [0] DataFrame
-        [1] Source information
         """
         operating_expense_perc_premium = self.table_import(path = self.path,
                                             sheet_name = self.sheet_name,   
@@ -153,9 +142,6 @@ class sva:
     
     def budgeted_trustee_expense(self):
         """
-        Tuple contains:
-        [0] DataFrame
-        [1] Source information
         """
         budgeted_trustee_expense = self.table_import(path = self.path,
                                             sheet_name = self.sheet_name,   
@@ -170,9 +156,6 @@ class sva:
         
     def projected_trustee_expense(self):
         """
-        Tuple contains:
-        [0] DataFrame
-        [1] Source information
         """
         projected_trustee_expense = self.table_import(path = self.path,
                                             sheet_name = self.sheet_name,  
@@ -190,9 +173,6 @@ class sva:
         
     def ip_continuance_rates(self):
         """
-        Tuple contains:
-        [0] DataFrame
-        [1] Source information
         """
         ip_continuance_rates = self.table_import(path = self.path,
                                             sheet_name = self.sheet_name, 
@@ -204,7 +184,7 @@ class sva:
                                           trim_column_names = True,
                                           trim_index_name = True)
         # Manually renaming index here. 
-        ip_continuance_rates[0].index.rename('Month', inplace=True)
+        ip_continuance_rates.index.rename('Month', inplace=True)
         return ip_continuance_rates
 
     class dlr_parameters:
@@ -214,9 +194,6 @@ class sva:
             
         def salary_replacement_ratio(self):
             """
-            Tuple contains:
-            [0] DataFrame
-            [1] Source information
             """
             salary_replacement_ratio = sva.table_import(path = self.path,
                                             sheet_name = self.sheet_name, 
@@ -231,9 +208,6 @@ class sva:
         
         def continuing_retirement_benefit(self):
             """
-            Tuple contains:
-            [0] DataFrame
-            [1] Source information
             """
             continuing_retirement_benefit = self.table_import(path = self.path,
                                         sheet_name = self.sheet_name, 
@@ -248,9 +222,6 @@ class sva:
 
         def assumed_avg_age_at_disability(self):
             """
-            Tuple contains:
-            [0] DataFrame
-            [1] Source information
             """
             assumed_avg_age_at_disability = self.table_import(path = self.path,
                                         sheet_name = self.sheet_name,  
@@ -265,9 +236,6 @@ class sva:
         
         def assumed_default_salary(self):
             """
-            Tuple contains:
-            [0] DataFrame
-            [1] Source information
             """
             assumed_default_salary = self.table_import(path = self.path,
                                         sheet_name = self.sheet_name,  
@@ -282,9 +250,6 @@ class sva:
 
         def payment_ratio(self):
             """
-            Tuple contains:
-            [0] DataFrame
-            [1] Source information
             """
             payment_ratio = self.table_import(path = self.path,
                                         sheet_name = self.sheet_name,   
@@ -299,9 +264,6 @@ class sva:
         
         def reopened_claims_reserves_loading(self):
             """
-            Tuple contains:
-            [0] DataFrame
-            [1] Source information
             """
             reopened_claims_reserves_loading = self.table_import(path = self.path,
                                         sheet_name = self.sheet_name,   
@@ -316,9 +278,6 @@ class sva:
         
         def claim_index_rate(self):
             """
-            Tuple contains:
-            [0] DataFrame
-            [1] Source information
             """
             claim_index_rate = self.table_import(path = self.path,
                                         sheet_name = self.sheet_name,   
@@ -333,9 +292,6 @@ class sva:
 
         def benefit_indexation_month(self):
             """
-            Tuple contains:
-            [0] DataFrame
-            [1] Source information
             """
             benefit_indexation_month = self.table_import(path = self.path,
                                         sheet_name = self.sheet_name,   
@@ -350,9 +306,6 @@ class sva:
             
     def ip_ibnr_adjustment(self):
         """
-        Tuple contains:
-        [0] DataFrame
-        [1] Source information
         """
         ip_ibnr_adjustment = self.table_import(path = self.path,
                                             sheet_name = self.sheet_name,   
@@ -370,9 +323,6 @@ class sva:
         
     def appeals_reserve_assumptions(self):
         """
-        Tuple contains:
-        [0] DataFrame
-        [1] Source information
         """
         appeals_reserve_assumptions = self.table_import(path = self.path,
                                             sheet_name = self.sheet_name,   
@@ -387,9 +337,6 @@ class sva:
     
     def perc_of_appealed_claims_accepted(self):
         """
-        Tuple contains:
-        [0] DataFrame
-        [1] Source information
         """
         perc_of_appealed_claims_accepted= self.table_import(path = self.path,
                                             sheet_name = self.sheet_name,   
@@ -400,7 +347,7 @@ class sva:
                                           index_col = 0,
                                           trim_column_names = True,
                                           trim_index_name = True)
-        perc_of_appealed_claims_accepted[0].rename(index={0:'GOV', 1:'NONGOV'}, inplace=True)
+        perc_of_appealed_claims_accepted.rename(index={0:'GOV', 1:'NONGOV'}, inplace=True)
         return perc_of_appealed_claims_accepted
 
 # =============================================================================
@@ -408,9 +355,6 @@ class sva:
         
     def decline_rate(self):
         """
-        Tuple contains:
-        [0] DataFrame
-        [1] Source information
         """
         decline_rate = self.table_import(path = self.path,
                                             sheet_name = self.sheet_name,   
@@ -425,9 +369,6 @@ class sva:
     
     def decline_rate_delay(self):
         """
-        Tuple contains:
-        [0] DataFrame
-        [1] Source information
         """
         decline_rate_delay = self.table_import(path = self.path,
                                             sheet_name = self.sheet_name,   
@@ -442,9 +383,6 @@ class sva:
 
     def simultaneous_ip_tpd_decline(self):
         """
-        Tuple contains:
-        [0] DataFrame
-        [1] Source information
         """
         simultaneous_ip_tpd_decline = self.table_import(path = self.path,
                                             sheet_name = self.sheet_name,   
@@ -462,9 +400,6 @@ class sva:
         
     def expected_loss_ratio_gov(self):
         """
-        Tuple contains:
-        [0] DataFrame
-        [1] Source information
         """
         expected_loss_ratio_gov = self.table_import(path = self.path,
                                             sheet_name = self.sheet_name,  
@@ -479,9 +414,6 @@ class sva:
     
     def expected_loss_ratio_nongov(self):
         """
-        Tuple contains:
-        [0] DataFrame
-        [1] Source information
         """
         expected_loss_ratio_nongov = self.table_import(path = self.path,
                                             sheet_name = self.sheet_name,  
@@ -499,9 +431,6 @@ class sva:
         
     def payment_delay_factors(self):
         """
-        Tuple contains:
-        [0] DataFrame
-        [1] Source information
         """
         payment_delay_factors = self.table_import(path = self.path,
                                             sheet_name = self.sheet_name,  
@@ -516,9 +445,6 @@ class sva:
     # 7
     def payment_delay_factors_discrete(self):
         """
-        Tuple contains:
-        [0] DataFrame
-        [1] Source information
         """
         payment_delay_factors_discrete = self.table_import(path = self.path,
                                             sheet_name = self.sheet_name,   
@@ -536,9 +462,6 @@ class sva:
     
     def average_claim_size(self):
         """
-        Tuple contains:
-        [0] DataFrame
-        [1] Source information
         """
         average_claim_size = self.table_import(path = self.path,
                                             sheet_name = self.sheet_name,   
@@ -553,9 +476,6 @@ class sva:
 
     def acs_ip_linked_tpd(self):
         """
-        Tuple contains:
-        [0] DataFrame
-        [1] Source information
         """
         acs_ip_linked_tpd = self.table_import(path = self.path,
                                             sheet_name = self.sheet_name,   
@@ -570,9 +490,6 @@ class sva:
 
     def acs_by_notification_delay_q(self):
         """
-        Tuple contains:
-        [0] DataFrame
-        [1] Source information
         """
         acs_by_notification_delay_q = self.table_import(path = self.path,
                                             sheet_name = self.sheet_name,  
@@ -587,9 +504,6 @@ class sva:
     
     def perc_si_at_ip_doe(self):
         """
-        Tuple contains:
-        [0] DataFrame
-        [1] Source information
         """
         perc_si_at_ip_doe = self.table_import(path = self.path,
                                             sheet_name = self.sheet_name,   
@@ -604,9 +518,6 @@ class sva:
     
     def tpd_si_scales_by_age(self):
         """
-        Tuple contains:
-        [0] DataFrame
-        [1] Source information
         """
         tpd_si_scales_by_age = self.table_import(path = self.path,
                                             sheet_name = self.sheet_name,   
@@ -629,9 +540,6 @@ class sva:
         
         def age_rates(self):
             """
-            Tuple contains:
-            [0] DataFrame
-            [1] Source information
             """
             age_rates = self.table_import(path = self.path,
                                             sheet_name = self.sheet_name,  
@@ -646,9 +554,6 @@ class sva:
       
         def duration_of_claim_g_wp_oc(self):
             """
-            Tuple contains:
-            [0] DataFrame
-            [1] Source information
             """
             duration_of_claim_g_wp_oc = self.table_import(path = self.path,
                                             sheet_name = self.sheet_name,  
@@ -661,21 +566,19 @@ class sva:
                                               trim_index_name = None)
             # Data adjustments here to correctly index table. 
             # Note: Consider 'melting' multi-index tables for use in models. 
-            df = duration_of_claim_g_wp_oc[0].copy()
-            info = duration_of_claim_g_wp_oc[1].copy()
+            df = duration_of_claim_g_wp_oc.copy()
+            # info = duration_of_claim_g_wp_oc[1].copy()
             index = df[0:4]
             index = index.fillna(method='ffill', axis=1)
             df = df[4:]
             df.columns = pd.MultiIndex.from_arrays(index.values)
             df.index.name = 'Duration of Claim (months)'
-            duration_of_claim_g_wp_oc = tuple([df, info])
+            # duration_of_claim_g_wp_oc = tuple([df, info])
+            duration_of_claim_g_wp_oc = df
             return duration_of_claim_g_wp_oc
         
         def smoker_status(self):
             """
-            Tuple contains:
-            [0] DataFrame
-            [1] Source information
             """
             smoker_status = self.table_import(path = self.path,
                                             sheet_name = self.sheet_name,   
@@ -686,14 +589,11 @@ class sva:
                                               index_col = 0,
                                               trim_column_names = True,
                                               trim_index_name = None)
-            smoker_status[0].rename(columns={smoker_status[0].columns[0]: "smoker_status" }, inplace = True)
+            smoker_status.rename(columns={smoker_status.columns[0]: "smoker_status" }, inplace = True)
             return smoker_status
         
         def benefit_type(self):
             """
-            Tuple contains:
-            [0] DataFrame
-            [1] Source information
             """
             benefit_type = self.table_import(path = self.path,
                                             sheet_name = self.sheet_name, 
@@ -704,14 +604,11 @@ class sva:
                                               index_col = 0,
                                               trim_column_names = True,
                                               trim_index_name = None)
-            benefit_type[0].rename(columns={benefit_type[0].columns[0]: "benefit_type" }, inplace = True)  
+            benefit_type.rename(columns={benefit_type.columns[0]: "benefit_type" }, inplace = True)  
             return benefit_type
         
         def policy_duration_factor(self):
             """
-            Tuple contains:
-            [0] DataFrame
-            [1] Source information
             """
             policy_duration_factor = self.table_import(path = self.path,
                                             sheet_name = self.sheet_name,   
@@ -724,18 +621,19 @@ class sva:
                                               trim_index_name = None)
             # Data adjustments here to correctly index table. 
             # Note: Consider 'melting' multi-index tables for use in models. 
-            df = policy_duration_factor[0].copy()
-            info = policy_duration_factor[1].copy()
+            df = policy_duration_factor.copy()
+            # info = policy_duration_factor[1].copy()
             index = df[0:2]
             index = index.fillna(method='ffill', axis=1)
             df = df[2:]
             df.columns = pd.MultiIndex.from_arrays(index.values)
             df.index.name = 'Curtate Policy Year'
-            policy_duration_factor = tuple([df, info])     
+            # policy_duration_factor = tuple([df, info])  
+            policy_duration_factor = df
             return policy_duration_factor
 
-=============================================================================
-10
+# =============================================================================
+# 10
 
     class stress_margins:
         
