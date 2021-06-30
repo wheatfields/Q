@@ -12,10 +12,14 @@ class sva:
     def __init__(self, path, sheet_name):
         self.path = path
         self.sheet_name = sheet_name
-
-# =============================================================================
         
-    def table_import(self, path,
+        self.dlr_parameters = self.dlr_parameters(path, sheet_name)
+        self.termination_rates = self.termination_rates(path, sheet_name)
+        self.stress_margins = self.stress_margins(path, sheet_name)
+        
+# =============================================================================
+    @classmethod    
+    def table_import(cls, path,
              sheet_name, 
              columns, 
              row_start, row_end,
@@ -204,14 +208,17 @@ class sva:
         return ip_continuance_rates
 
     class dlr_parameters:
-        
+        def __init__(self, path, sheet_name):
+            self.path = path
+            self.sheet_name = sheet_name
+            
         def salary_replacement_ratio(self):
             """
             Tuple contains:
             [0] DataFrame
             [1] Source information
             """
-            salary_replacement_ratio = self.table_import(path = self.path,
+            salary_replacement_ratio = sva.table_import(path = self.path,
                                             sheet_name = self.sheet_name, 
                                           columns = 'AV:AW', 
                                           row_start = 11, row_end = 12,
@@ -615,7 +622,11 @@ class sva:
 # =============================================================================
 # 9
         
-    class termination_rates():
+    class termination_rates:
+        def __init__(self, path, sheet_name):
+            self.path = path
+            self.sheet_name = sheet_name
+        
         def age_rates(self):
             """
             Tuple contains:
@@ -723,9 +734,31 @@ class sva:
             policy_duration_factor = tuple([df, info])     
             return policy_duration_factor
 
-# =============================================================================
-# 10
+=============================================================================
+10
 
+    class stress_margins:
+        
+        def __init__(self, path, sheet_name):
+            self.path = path
+            self.sheet_name = sheet_name        
+        
+        class random:
+            def __init__(self, path, sheet_name):
+                  self.path = path
+                  self.sheet_name = sheet_name           
+            
+            def death(self):
+                death = self.table_import(path = self.path,
+                                            sheet_name = self.sheet_name,   
+                                              columns = 'FL:FM', 
+                                              row_start = 16, row_end = 26,
+                                              header_row = 16,
+                                              clear_first_n_rows = None, 
+                                              index_col = 0,
+                                              trim_column_names = True,
+                                              trim_index_name = None)
+                return death
 
 
 # =============================================================================
