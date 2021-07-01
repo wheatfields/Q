@@ -13,6 +13,7 @@ class sva:
         self.path = path
         self.sheet_name = sheet_name
         
+        # initiate nested classes
         self.dlr_parameters = self.dlr_parameters(path, sheet_name)
         self.termination_rates = self.termination_rates(path, sheet_name)
         self.stress_margins = self.stress_margins(path, sheet_name)
@@ -33,7 +34,7 @@ class sva:
         
         if header_row is not None:
             if isinstance(header_row, list)==False:
-                header = header_row-1
+                header = header_row - 1
             else:
                 header = header_row
         else:
@@ -60,22 +61,8 @@ class sva:
     
         if trim_index_name is not None:
             table.index.name = table.index.name.split('.')[0]
-        
-        # -----------------------
-        # # Add information on where the assumption came from in the workbook.
-        # # [Will always be reference 1]
-        # info = ['Path = ' + path,
-        #         'Sheet name = ' + sheet_name, 
-        #         'Columns = ' + columns, 
-        #         'Rows = ' + str(str(row_start) + ' to ' + str(row_end)), 
-        #         'Header row = ' + str(header_row), 
-        #         'Number of rows after header cleared = ' + str(clear_first_n_rows),
-        #         'Column used for index (0-indexed) = ' + str(index_col)
-        #         ]
-        # -----------------------
-    
+
         return table
-    # , info    
         
 # =============================================================================
 # 1         
@@ -758,7 +745,7 @@ class sva:
                 return ip_rbna  
           
         def time_to_react_future(self):
-            time_to_react_future = self.table_import(path = self.path,
+            time_to_react_future = sva.table_import(path = self.path,
                                         sheet_name = self.sheet_name,   
                                           columns = 'FL:FM', 
                                           row_start = 39, row_end = 40,
@@ -770,7 +757,7 @@ class sva:
             return time_to_react_future
         
         def event_pandemic_death(self):
-            event_pandemic_death = self.table_import(path = self.path,
+            event_pandemic_death = sva.table_import(path = self.path,
                                         sheet_name = self.sheet_name,   
                                           columns = 'FL:FM', 
                                           row_start = 42, row_end = 46,
@@ -781,8 +768,8 @@ class sva:
                                           trim_index_name = None).iloc[0,0]
             return event_pandemic_death
         
-         def event_pandemic_detpd(self):
-            event_pandemic_death = self.table_import(path = self.path,
+        def event_pandemic_tpd(self):
+            event_pandemic_tpd = sva.table_import(path = self.path,
                                         sheet_name = self.sheet_name,   
                                           columns = 'FL:FM', 
                                           row_start = 42, row_end = 46,
@@ -791,10 +778,10 @@ class sva:
                                           index_col = 0,
                                           trim_column_names = True,
                                           trim_index_name = None).iloc[1,0]
-            return event_pandemic_death
+            return event_pandemic_tpd
         
         def event_pandemic_ip(self):
-            event_pandemic_death = self.table_import(path = self.path,
+            event_pandemic_ip = sva.table_import(path = self.path,
                                         sheet_name = self.sheet_name,   
                                           columns = 'FL:FM', 
                                           row_start = 42, row_end = 46,
@@ -803,10 +790,10 @@ class sva:
                                           index_col = 0,
                                           trim_column_names = True,
                                           trim_index_name = None).iloc[2,0]
-            return event_pandemic_death
+            return event_pandemic_ip
 
         def prop_disabled_after_wp(self):
-            prop_disabled_after_wp = self.table_import(path = self.path,
+            prop_disabled_after_wp = sva.table_import(path = self.path,
                                         sheet_name = self.sheet_name,   
                                           columns = 'FL:FM', 
                                           row_start = 42, row_end = 46,
@@ -818,7 +805,7 @@ class sva:
             return prop_disabled_after_wp
 
         def lapse_stress(self):
-            lapse_stress = self.table_import(path = self.path,
+            lapse_stress = sva.table_import(path = self.path,
                                         sheet_name = self.sheet_name,   
                                           columns = 'FL:FM', 
                                           row_start = 48, row_end = 50,
@@ -830,7 +817,7 @@ class sva:
             return lapse_stress       
 
         def servicing_expense_stress(self):
-            servicing_expense_stress = self.table_import(path = self.path,
+            servicing_expense_stress = sva.table_import(path = self.path,
                                         sheet_name = self.sheet_name,   
                                           columns = 'FL:FM', 
                                           row_start = 48, row_end = 50,
@@ -842,79 +829,272 @@ class sva:
             return servicing_expense_stress       
 # =============================================================================
 # 11
-        def reinsurance(self):
-            reinsurance = self.table_import(path = self.path,
-                                        sheet_name = self.sheet_name,   
-                                          columns = 'FT:FY', 
-                                          row_start = 11, row_end = 14,
-                                          header_row = 11,
-                                          clear_first_n_rows = None, 
-                                          index_col = 0,
-                                          trim_column_names = True,
-                                          trim_index_name = None)
-            return reinsurance
-        
-        def catastrophe(self):
-            catastrophe = self.table_import(path = self.path,
-                                        sheet_name = self.sheet_name,   
-                                          columns = 'FT:FY', 
-                                          row_start = 21, row_end = 23,
-                                          header_row = 21,
-                                          clear_first_n_rows = None, 
-                                          index_col = 0,
-                                          trim_column_names = True,
-                                          trim_index_name = None).iloc[, 4]
-            return catastrophe
+    def reinsurance(self):
+        reinsurance = self.table_import(path = self.path,
+                                    sheet_name = self.sheet_name,   
+                                      columns = 'FT:FY', 
+                                      row_start = 11, row_end = 14,
+                                      header_row = 11,
+                                      clear_first_n_rows = None, 
+                                      index_col = 0,
+                                      trim_column_names = True,
+                                      trim_index_name = None)
+        return reinsurance
+    
+    def catastrophe_pl(self):
+        catastrophe_pl = self.table_import(path = self.path,
+                                    sheet_name = self.sheet_name,   
+                                      columns = 'FT:FY', 
+                                      row_start = 21, row_end = 23,
+                                      header_row = 21,
+                                      clear_first_n_rows = None, 
+                                      index_col = 0,
+                                      trim_column_names = True,
+                                      trim_index_name = None).iloc[0, 4]
+        return catastrophe_pl
 
+    def catastrophe_capital(self):
+        catastrophe_capital = self.table_import(path = self.path,
+                                    sheet_name = self.sheet_name,   
+                                      columns = 'FT:FY', 
+                                      row_start = 21, row_end = 23,
+                                      header_row = 21,
+                                      clear_first_n_rows = None, 
+                                      index_col = 0,
+                                      trim_column_names = True,
+                                      trim_index_name = None).iloc[1, 4]
+        return catastrophe_capital
 # =============================================================================
 # 12
 
+    def par_loadings(self):
+        par_loadings = self.table_import(path = self.path,
+                                    sheet_name = self.sheet_name,   
+                                      columns = 'GB:GC', 
+                                      row_start = 10, row_end = 11,
+                                      header_row = 10,
+                                      clear_first_n_rows = None, 
+                                      index_col = 0,
+                                      trim_column_names = True,
+                                      trim_index_name = None).iloc[0,0]
+        return par_loadings
 
-
+    def stamp_duty(self):
+        stamp_duty = self.table_import(path = self.path,
+                                    sheet_name = self.sheet_name,   
+                                      columns = 'GB:GC', 
+                                      row_start = 13, row_end = 15,
+                                      header_row = 13,
+                                      clear_first_n_rows = None, 
+                                      index_col = 0,
+                                      trim_column_names = True,
+                                      trim_index_name = None)
+        return stamp_duty
+    
+    def investment_earnings_b0(self):
+        investment_earnings_b0 = self.table_import(path = self.path,
+                                    sheet_name = self.sheet_name,   
+                                      columns = 'GB:GC', 
+                                      row_start = 16, row_end = 17,
+                                      header_row = 16,
+                                      clear_first_n_rows = None, 
+                                      index_col = 0,
+                                      trim_column_names = True,
+                                      trim_index_name = None).iloc[0,0]
+        return investment_earnings_b0
 # =============================================================================
 # 13
 
+    def contingency_margin_start(self):
+        contingency_margin_start = self.table_import(path = self.path,
+                                    sheet_name = self.sheet_name,   
+                                      columns = 'GF:GG', 
+                                      row_start = 10, row_end = 11,
+                                      header_row = 10,
+                                      clear_first_n_rows = None, 
+                                      index_col = 0,
+                                      trim_column_names = True,
+                                      trim_index_name = None).iloc[0,0]
+        return contingency_margin_start    
 
-        
+    def contingency_margin(self):
+        contingency_margin = self.table_import(path = self.path,
+                                    sheet_name = self.sheet_name,   
+                                      columns = 'GF:GH', 
+                                      row_start = 13, row_end = 14,
+                                      header_row = 13,
+                                      clear_first_n_rows = None, 
+                                      index_col = None,
+                                      trim_column_names = True,
+                                      trim_index_name = None)
+        return contingency_margin            
 # =============================================================================
 # 14
 
-
+    def notification_delay(self):
+        notification_delay = self.table_import(path = self.path,
+                                    sheet_name = self.sheet_name,   
+                                      columns = 'GK:GM', 
+                                      row_start = 11, row_end = 12,
+                                      header_row = 11,
+                                      clear_first_n_rows = None, 
+                                      index_col = None,
+                                      trim_column_names = True,
+                                      trim_index_name = None)
+        return notification_delay  
       
 # =============================================================================
 # 15
 
+    def cmm_impact_termination_rates_start(self):
+        cmm_impact_termination_rates = self.table_import(path = self.path,
+                                    sheet_name = self.sheet_name,   
+                                      columns = 'GP:GQ',
+                                      row_start = 11, row_end = 13,
+                                      header_row = 11,
+                                      clear_first_n_rows = None, 
+                                      index_col = 0,
+                                      trim_column_names = True,
+                                      trim_index_name = None).iloc[0,0]
+        return cmm_impact_termination_rates  
 
-         
+    def cmm_impact_termination_rates_perc(self):
+        cmm_impact_termination_rates_perc = self.table_import(path = self.path,
+                                    sheet_name = self.sheet_name,   
+                                      columns = 'GP:GQ',
+                                      row_start = 11, row_end = 13,
+                                      header_row = 11,
+                                      clear_first_n_rows = None, 
+                                      index_col = 0,
+                                      trim_column_names = True,
+                                      trim_index_name = None).iloc[1,0]
+        return cmm_impact_termination_rates_perc         
 # =============================================================================
 # 16
-
+    def covid19_impact_termination_rates(self):
+        covid19_impact_termination_rates = self.table_import(path = self.path,
+                                    sheet_name = self.sheet_name,   
+                                      columns = 'GS:GT',
+                                      row_start = 11, row_end = 16,
+                                      header_row = 11,
+                                      clear_first_n_rows = None, 
+                                      index_col = 0,
+                                      trim_column_names = True,
+                                      trim_index_name = None)   
+        return covid19_impact_termination_rates   
 
 
 # =============================================================================
 # 17
 
-
+    def covid19_adjustment_ip_dlr(self):
+        covid19_adjustment_ip_dlr = self.table_import(path = self.path,
+                                    sheet_name = self.sheet_name,   
+                                      columns = 'GV:GW',
+                                      row_start = 11, row_end = 27,
+                                      header_row = 11,
+                                      clear_first_n_rows = None, 
+                                      index_col = 0,
+                                      trim_column_names = True,
+                                      trim_index_name = None)   
+        return covid19_adjustment_ip_dlr   
 
 # =============================================================================
 # 18
 
+    def expected_lr_combined_capital(self):
+        expected_lr_combined_capital = self.table_import(path = self.path,
+                                    sheet_name = self.sheet_name,   
+                                      columns = 'GY:HB',
+                                      row_start = 11, row_end = 90,
+                                      header_row = 11,
+                                      clear_first_n_rows = 1, 
+                                      index_col = 0,
+                                      trim_column_names = True,
+                                      trim_index_name = None)   
+        return expected_lr_combined_capital
 
 
 # =============================================================================
 # 19
 
+    def gov_tpd_linked_to_ip(self):
+        gov_tpd_linked_to_ip = self.table_import(path = self.path,
+                                    sheet_name = self.sheet_name,   
+                                      columns = 'HD:HF', 
+                                      row_start = 11, row_end = 23,
+                                      header_row = 11,
+                                      clear_first_n_rows = None, 
+                                      index_col = 0,
+                                      trim_column_names = True,
+                                      trim_index_name = None)   
+        return gov_tpd_linked_to_ip
 
-
+    def tpd_linked_reporting_delay(self):
+        tpd_linked_reporting_delay = self.table_import(path = self.path,
+                                    sheet_name = self.sheet_name,   
+                                      columns = 'HH:HI', 
+                                      row_start = 11, row_end = 65,
+                                      header_row = 11,
+                                      clear_first_n_rows = None, 
+                                      index_col = 0,
+                                      trim_column_names = True,
+                                      trim_index_name = None)   
+        return tpd_linked_reporting_delay
+    
+    def conversion_rates(self):
+        conversion_rates = self.table_import(path = self.path,
+                                    sheet_name = self.sheet_name,   
+                                      columns = 'HK:HM', 
+                                      row_start = 11, row_end = 26,
+                                      header_row = 11,
+                                      clear_first_n_rows = None, 
+                                      index_col = 0,
+                                      trim_column_names = True,
+                                      trim_index_name = None)   
+        return conversion_rates
+    
 # =============================================================================
 # 20
 
-
+    def claims_reporting_delay_tpd_ip(self):
+        claims_reporting_delay_tpd_ip = self.table_import(path = self.path,
+                                    sheet_name = self.sheet_name,   
+                                      columns = 'HO:HQ', 
+                                      row_start = 11, row_end = 305,
+                                      header_row = 11,
+                                      clear_first_n_rows = 1, 
+                                      index_col = 0,
+                                      trim_column_names = True,
+                                      trim_index_name = None)   
+        return claims_reporting_delay_tpd_ip
+    
+    def claims_delay_factors_tpd_ip(self):
+        claims_delay_factors_tpd_ip = self.table_import(path = self.path,
+                                    sheet_name = self.sheet_name,   
+                                      columns = 'HS:HU', 
+                                      row_start = 11, row_end = 305,
+                                      header_row = 11,
+                                      clear_first_n_rows = 1, 
+                                      index_col = 0,
+                                      trim_column_names = True,
+                                      trim_index_name = None)   
+        return claims_delay_factors_tpd_ip
 
 # =============================================================================
 # 21
 
-
+    def missing_subcase_reserve(self):
+        missing_subcase_reserve = self.table_import(path = self.path,
+                                    sheet_name = self.sheet_name,   
+                                      columns = 'HW:HX', 
+                                      row_start = 11, row_end = 15,
+                                      header_row = 11,
+                                      clear_first_n_rows = 1, 
+                                      index_col = 0,
+                                      trim_column_names = True,
+                                      trim_index_name = None)   
+        return missing_subcase_reserve
 
 # =============================================================================
 
