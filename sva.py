@@ -209,7 +209,7 @@ class sva:
         def continuing_retirement_benefit(self):
             """
             """
-            continuing_retirement_benefit = self.table_import(path = self.path,
+            continuing_retirement_benefit = sva.table_import(path = self.path,
                                         sheet_name = self.sheet_name, 
                                       columns = 'AV:AW', 
                                       row_start = 11, row_end = 13,
@@ -223,7 +223,7 @@ class sva:
         def assumed_avg_age_at_disability(self):
             """
             """
-            assumed_avg_age_at_disability = self.table_import(path = self.path,
+            assumed_avg_age_at_disability = sva.table_import(path = self.path,
                                         sheet_name = self.sheet_name,  
                                       columns = 'AV:AW', 
                                       row_start = 11, row_end = 14,
@@ -237,7 +237,7 @@ class sva:
         def assumed_default_salary(self):
             """
             """
-            assumed_default_salary = self.table_import(path = self.path,
+            assumed_default_salary = sva.table_import(path = self.path,
                                         sheet_name = self.sheet_name,  
                                       columns = 'AV:AW', 
                                       row_start = 11, row_end = 15,
@@ -251,7 +251,7 @@ class sva:
         def payment_ratio(self):
             """
             """
-            payment_ratio = self.table_import(path = self.path,
+            payment_ratio = sva.table_import(path = self.path,
                                         sheet_name = self.sheet_name,   
                                       columns = 'AV:AW', 
                                       row_start = 11, row_end = 16,
@@ -265,7 +265,7 @@ class sva:
         def reopened_claims_reserves_loading(self):
             """
             """
-            reopened_claims_reserves_loading = self.table_import(path = self.path,
+            reopened_claims_reserves_loading = sva.table_import(path = self.path,
                                         sheet_name = self.sheet_name,   
                                       columns = 'AV:AW', 
                                       row_start = 11, row_end = 17,
@@ -279,7 +279,7 @@ class sva:
         def claim_index_rate(self):
             """
             """
-            claim_index_rate = self.table_import(path = self.path,
+            claim_index_rate = sva.table_import(path = self.path,
                                         sheet_name = self.sheet_name,   
                                       columns = 'AV:AW', 
                                       row_start = 11, row_end = 18,
@@ -293,7 +293,7 @@ class sva:
         def benefit_indexation_month(self):
             """
             """
-            benefit_indexation_month = self.table_import(path = self.path,
+            benefit_indexation_month = sva.table_import(path = self.path,
                                         sheet_name = self.sheet_name,   
                                       columns = 'AV:AW', 
                                       row_start = 11, row_end = 19,
@@ -762,8 +762,6 @@ class sva:
 # =============================================================================
 # 11
 
-class test:
-    print('yes')
 
 # =============================================================================
 # 12
