@@ -25,4 +25,12 @@ sva = sva.sva(path=path, sheet_name=new_product)
 
 sva.operating_expense_perc_premium()
 
-sva.stress_margins.random.death()
+sva.stress_margins.future.ip_ibnr()
+
+help(sva.dlr_parameters)
+
+
+
+a = dir(sva.termination_rates)
+dir_sva = dir(sva.stress_margins)
+[dir_sva for dir_sva in dir_sva if '__' not in dir_sva]
