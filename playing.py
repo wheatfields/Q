@@ -25,7 +25,7 @@ sva = sva.sva(path=path, sheet_name=new_product)
 
 sva.operating_expense_perc_premium()
 
-sva.stress_margins.future.ip_ibnr()
+sva.catastrophe_capital()
 
 help(sva.dlr_parameters)
 
