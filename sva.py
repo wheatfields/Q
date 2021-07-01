@@ -404,7 +404,7 @@ class sva:
         expected_loss_ratio_gov = self.table_import(path = self.path,
                                             sheet_name = self.sheet_name,  
                                           columns = 'BP:BS', 
-                                          row_start = 1, row_end = 84,
+                                          row_start = 11, row_end = 84,
                                           header_row = 11,
                                           clear_first_n_rows = 1, 
                                           index_col = 0,
@@ -508,12 +508,12 @@ class sva:
         perc_si_at_ip_doe = self.table_import(path = self.path,
                                             sheet_name = self.sheet_name,   
                                           columns = 'CZ:DA', 
-                                          row_start = 20, row_end = 21,
-                                          header_row = 20,
-                                          clear_first_n_rows = 1, 
+                                          row_start = 19, row_end = 20,
+                                          header_row = 19,
+                                          clear_first_n_rows = None, 
                                           index_col = 0,
-                                          trim_column_names = True,
-                                          trim_index_name = True)
+                                          trim_column_names = None,
+                                          trim_index_name = None)
         return perc_si_at_ip_doe
     
     def tpd_si_scales_by_age(self):
@@ -541,7 +541,7 @@ class sva:
         def age_rates(self):
             """
             """
-            age_rates = self.table_import(path = self.path,
+            age_rates = sva.table_import(path = self.path,
                                             sheet_name = self.sheet_name,  
                                               columns = 'DD:DF', 
                                               row_start = 11, row_end = 57,
@@ -555,7 +555,7 @@ class sva:
         def duration_of_claim_g_wp_oc(self):
             """
             """
-            duration_of_claim_g_wp_oc = self.table_import(path = self.path,
+            duration_of_claim_g_wp_oc = sva.table_import(path = self.path,
                                             sheet_name = self.sheet_name,  
                                               columns = 'DH:EF', 
                                               row_start = 10, row_end = 134,
@@ -580,7 +580,7 @@ class sva:
         def smoker_status(self):
             """
             """
-            smoker_status = self.table_import(path = self.path,
+            smoker_status = sva.table_import(path = self.path,
                                             sheet_name = self.sheet_name,   
                                               columns = 'EH:EI', 
                                               row_start = 10, row_end = 12,
@@ -595,7 +595,7 @@ class sva:
         def benefit_type(self):
             """
             """
-            benefit_type = self.table_import(path = self.path,
+            benefit_type = sva.table_import(path = self.path,
                                             sheet_name = self.sheet_name, 
                                               columns = 'EK:EL', 
                                               row_start = 10, row_end = 12,
@@ -610,7 +610,7 @@ class sva:
         def policy_duration_factor(self):
             """
             """
-            policy_duration_factor = self.table_import(path = self.path,
+            policy_duration_factor = sva.table_import(path = self.path,
                                             sheet_name = self.sheet_name,   
                                               columns = 'EN:ER', 
                                               row_start = 10, row_end = 23,
@@ -758,10 +758,113 @@ class sva:
                 return ip_rbna  
           
         def time_to_react_future(self):
-            time_to_react_future = 1
+            time_to_react_future = self.table_import(path = self.path,
+                                        sheet_name = self.sheet_name,   
+                                          columns = 'FL:FM', 
+                                          row_start = 39, row_end = 40,
+                                          header_row = 39,
+                                          clear_first_n_rows = None, 
+                                          index_col = 0,
+                                          trim_column_names = True,
+                                          trim_index_name = None).iloc[0,0]
+            return time_to_react_future
+        
+        def event_pandemic_death(self):
+            event_pandemic_death = self.table_import(path = self.path,
+                                        sheet_name = self.sheet_name,   
+                                          columns = 'FL:FM', 
+                                          row_start = 42, row_end = 46,
+                                          header_row = 42,
+                                          clear_first_n_rows = None, 
+                                          index_col = 0,
+                                          trim_column_names = True,
+                                          trim_index_name = None).iloc[0,0]
+            return event_pandemic_death
+        
+         def event_pandemic_detpd(self):
+            event_pandemic_death = self.table_import(path = self.path,
+                                        sheet_name = self.sheet_name,   
+                                          columns = 'FL:FM', 
+                                          row_start = 42, row_end = 46,
+                                          header_row = 42,
+                                          clear_first_n_rows = None, 
+                                          index_col = 0,
+                                          trim_column_names = True,
+                                          trim_index_name = None).iloc[1,0]
+            return event_pandemic_death
+        
+        def event_pandemic_ip(self):
+            event_pandemic_death = self.table_import(path = self.path,
+                                        sheet_name = self.sheet_name,   
+                                          columns = 'FL:FM', 
+                                          row_start = 42, row_end = 46,
+                                          header_row = 42,
+                                          clear_first_n_rows = None, 
+                                          index_col = 0,
+                                          trim_column_names = True,
+                                          trim_index_name = None).iloc[2,0]
+            return event_pandemic_death
+
+        def prop_disabled_after_wp(self):
+            prop_disabled_after_wp = self.table_import(path = self.path,
+                                        sheet_name = self.sheet_name,   
+                                          columns = 'FL:FM', 
+                                          row_start = 42, row_end = 46,
+                                          header_row = 42,
+                                          clear_first_n_rows = None, 
+                                          index_col = 0,
+                                          trim_column_names = True,
+                                          trim_index_name = None).iloc[3,0]
+            return prop_disabled_after_wp
+
+        def lapse_stress(self):
+            lapse_stress = self.table_import(path = self.path,
+                                        sheet_name = self.sheet_name,   
+                                          columns = 'FL:FM', 
+                                          row_start = 48, row_end = 50,
+                                          header_row = 48,
+                                          clear_first_n_rows = None, 
+                                          index_col = 0,
+                                          trim_column_names = True,
+                                          trim_index_name = None).iloc[0,0]
+            return lapse_stress       
+
+        def servicing_expense_stress(self):
+            servicing_expense_stress = self.table_import(path = self.path,
+                                        sheet_name = self.sheet_name,   
+                                          columns = 'FL:FM', 
+                                          row_start = 48, row_end = 50,
+                                          header_row = 48,
+                                          clear_first_n_rows = None, 
+                                          index_col = 0,
+                                          trim_column_names = True,
+                                          trim_index_name = None).iloc[1,0]
+            return servicing_expense_stress       
 # =============================================================================
 # 11
-
+        def reinsurance(self):
+            reinsurance = self.table_import(path = self.path,
+                                        sheet_name = self.sheet_name,   
+                                          columns = 'FT:FY', 
+                                          row_start = 11, row_end = 14,
+                                          header_row = 11,
+                                          clear_first_n_rows = None, 
+                                          index_col = 0,
+                                          trim_column_names = True,
+                                          trim_index_name = None)
+            return reinsurance
+        
+        def catastrophe(self):
+            catastrophe = self.table_import(path = self.path,
+                                        sheet_name = self.sheet_name,   
+                                          columns = 'FT:FY', 
+                                          row_start = 21, row_end = 23,
+                                          header_row = 21,
+                                          clear_first_n_rows = None, 
+                                          index_col = 0,
+                                          trim_column_names = True,
+                                          trim_index_name = None).iloc[, 4]
+            return catastrophe
 
 # =============================================================================
 # 12
